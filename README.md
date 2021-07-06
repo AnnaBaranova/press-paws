@@ -4,6 +4,10 @@ The only resort of its kind that recognizes the bond between you and your pets, 
 
 Check out Press Paws [here](https://presspaws.herokuapp.com/).
 
+## Objective
+
+To create a functioning back-end application with full-CRUD operations using Python, Django and PostgreSQL.
+
 ## The Concepts
 
 [### Trello Board](https://trello.com/b/43Vn4BYd/project-3-press-paws-resort)
@@ -23,5 +27,13 @@ Check out Press Paws [here](https://presspaws.herokuapp.com/).
 ## Skills Used
 * Python
 * Django
+* PostgreSQL
+* AWS S3
+* Deployed on Heroku
 
 ## Next Steps
+
+
+-------
+
+Thank you for reading! Enjoy using the app and please share feedback 😊
