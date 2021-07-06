@@ -147,7 +147,6 @@ class ReservationCreate(LoginRequiredMixin, CreateView):
   model = Reservation
   form_class = ReservationForm
 
-
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['bookedDays'] = []
@@ -157,6 +156,36 @@ class ReservationCreate(LoginRequiredMixin, CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
+class ReservationRoomCreate(LoginRequiredMixin, CreateView):
+  model = Reservation
+  form_class = ReservationForm
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    room_reservations = Reservation.objects.filter(room_id = self.kwargs['room_id'])
+    days = list(map(lambda x: getDays(x.date_from, x.date_to), room_reservations))
+    days = [item for sublist in days for item in sublist] 
+    context['bookedDays'] = days
+    print("req", self.request)
+    print("room id", self.kwargs['room_id'])
+    context['room'] = Room.objects.get(id=self.kwargs['room_id'])
+    return context
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    print("clean:", form.cleaned_data)
+    print("clean method:", form.clean())
+    print("VALID FORM")
+    form.instance.room = Room.objects.get(id=self.kwargs['room_id'])
+    return super().form_valid(form)
+
+
+@login_required
+def successful_reservation(request):
+  reservations = Reservation.objects.filter(user=request.user.id)
+  latest_reservation = reservations.order_by("-id").first
+  date = datetime.date.today()
+  return render(request, 'main_app/reservation_list_success.html', {'reservations': reservations, 'date': date, 'latest_res': latest_reservation})
 
 class ReservationList(LoginRequiredMixin, ListView):
     model = Reservation
@@ -172,35 +201,6 @@ class ReservationDetail(LoginRequiredMixin, DetailView):
     def get_queryset(self):
       return Reservation.objects.filter(user=self.request.user.id)
     success_url = '/reservations/'
-
-class ReservationRoomCreate(LoginRequiredMixin, CreateView):
-  model = Reservation
-  form_class = ReservationRoomForm
-
-
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    room_reservations = Reservation.objects.filter(room_id = self.kwargs['room_id'])
-    days = list(map(lambda x: getDays(x.date_from, x.date_to), room_reservations))
-    days = [item for sublist in days for item in sublist] 
-    context['bookedDays'] = days
-    print("req", self.request)
-    print("room id", self.kwargs['room_id'])
-    context['room'] = Room.objects.get(id=self.kwargs['room_id'])
-    return context
-
-  def form_valid(self, form):
-    form.instance.user = self.request.user
-    form.instance.room = Room.objects.get(id=self.kwargs['room_id'])
-    return super().form_valid(form)
-
-
-@login_required
-def successful_reservation(request):
-  reservations = Reservation.objects.filter(user=request.user.id)
-  latest_reservation = reservations.order_by("-id").first
-  date = datetime.date.today()
-  return render(request, 'main_app/reservation_list_success.html', {'reservations': reservations, 'date': date, 'latest_res': latest_reservation})
 
 class ReservationUpdate(LoginRequiredMixin, UpdateView):
   model = Reservation
