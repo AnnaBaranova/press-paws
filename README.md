@@ -6,7 +6,9 @@ Check out Press Paws [here](https://presspaws.herokuapp.com/).
 
 ## Objective
 
-To create a functioning back-end application with full-CRUD operations using Python, Django and PostgreSQL.
+To create a functioning back-end application with full-CRUD operations using the Python-based Django Web Framework and PostgreSQL. 
+
+In our group of 3, we planned, designed and collaboratively built this full-stack web app.
 
 ## The Concepts
 
