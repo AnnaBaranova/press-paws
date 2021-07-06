@@ -158,7 +158,8 @@ class ReservationCreate(LoginRequiredMixin, CreateView):
 
 class ReservationRoomCreate(LoginRequiredMixin, CreateView):
   model = Reservation
-  form_class = ReservationForm
+  form_class = ReservationRoomForm
+
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -173,9 +174,6 @@ class ReservationRoomCreate(LoginRequiredMixin, CreateView):
 
   def form_valid(self, form):
     form.instance.user = self.request.user
-    print("clean:", form.cleaned_data)
-    print("clean method:", form.clean())
-    print("VALID FORM")
     form.instance.room = Room.objects.get(id=self.kwargs['room_id'])
     return super().form_valid(form)
 
