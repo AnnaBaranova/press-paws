@@ -29,7 +29,7 @@ class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
         fields = ['room', 'date_from', 'date_to', 'number_of_guests', 'number_of_pets']
-
+    
     def clean(self):
         cleaned_data=super(ReservationForm,self).clean()
         number_of_guests = cleaned_data.get('number_of_guests')
@@ -38,13 +38,13 @@ class ReservationForm(ModelForm):
         date_to = cleaned_data.get("date_to")
         date_from = cleaned_data.get("date_from")
         if number_of_guests < 1 or number_of_pets < 1:
-            raise forms.ValidationError("We accept one or more guest and pet")
+            raise forms.ValidationError("You need at least one guest and one pet to stay in this room.")
         if number_of_guests > room.people_capacity and number_of_pets > room.pets_capacity:
-            raise forms.ValidationError("This is way too many pets and people for this room!")
+            raise forms.ValidationError(f"Sorry! This room can only hold {room.people_capacity} people and {room.pets_capacity} pets.")
         elif number_of_pets > room.pets_capacity:
-            raise forms.ValidationError("Sorry! That's too many pets for this room. Try another!")
+            raise forms.ValidationError(f"Sorry! That's too many pets for this room. It can only hold {room.pets_capacity} pets.")
         elif number_of_guests > room.people_capacity:
-            raise forms.ValidationError("That's too many people for this room!")
+            raise forms.ValidationError(f"Sorry! That's too many people for this room. It can only hold {room.people_capacity} people.")
         else:
             delta = date_to - date_from
             if delta.days < 1:
@@ -57,7 +57,7 @@ class ReservationRoomForm(ModelForm):
     class Meta:
         model = Reservation
         fields = ['date_from', 'date_to', 'number_of_guests', 'number_of_pets']
-
+        
     def clean(self):
         cleaned_data=super(ReservationRoomForm,self).clean()
         number_of_guests = cleaned_data.get('number_of_guests')

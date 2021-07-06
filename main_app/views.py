@@ -147,7 +147,6 @@ class ReservationCreate(LoginRequiredMixin, CreateView):
   model = Reservation
   form_class = ReservationForm
 
-
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['bookedDays'] = []
@@ -156,22 +155,6 @@ class ReservationCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
-
-
-class ReservationList(LoginRequiredMixin, ListView):
-    model = Reservation
-    def get_context_data(self, **kwargs):
-      context = super().get_context_data(**kwargs)
-      context['date'] = datetime.date.today()
-      return context
-    def get_queryset(self):
-      return Reservation.objects.filter(user=self.request.user.id)
-
-class ReservationDetail(LoginRequiredMixin, DetailView):
-    model = Reservation
-    def get_queryset(self):
-      return Reservation.objects.filter(user=self.request.user.id)
-    success_url = '/reservations/'
 
 class ReservationRoomCreate(LoginRequiredMixin, CreateView):
   model = Reservation
@@ -201,6 +184,21 @@ def successful_reservation(request):
   latest_reservation = reservations.order_by("-id").first
   date = datetime.date.today()
   return render(request, 'main_app/reservation_list_success.html', {'reservations': reservations, 'date': date, 'latest_res': latest_reservation})
+
+class ReservationList(LoginRequiredMixin, ListView):
+    model = Reservation
+    def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context['date'] = datetime.date.today()
+      return context
+    def get_queryset(self):
+      return Reservation.objects.filter(user=self.request.user.id)
+
+class ReservationDetail(LoginRequiredMixin, DetailView):
+    model = Reservation
+    def get_queryset(self):
+      return Reservation.objects.filter(user=self.request.user.id)
+    success_url = '/reservations/'
 
 class ReservationUpdate(LoginRequiredMixin, UpdateView):
   model = Reservation
