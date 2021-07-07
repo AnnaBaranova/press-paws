@@ -4,6 +4,8 @@ The only resort of its kind that recognizes the bond between you and your pets, 
 
 Check out Press Paws [here](https://presspaws.herokuapp.com/).
 
+<img src="https://i.imgur.com/bPfS1Vn.png">
+
 ## Objective
 
 To create a functioning back-end application with full-CRUD operations using the Python-based Django Web Framework and PostgreSQL. 
