@@ -12,9 +12,11 @@ In our group of 3, we planned, designed and collaboratively built this full-stac
 
 ## The Concepts
 
-[### Trello Board](https://trello.com/b/43Vn4BYd/project-3-press-paws-resort)
+### [Trello Board](https://trello.com/b/43Vn4BYd/project-3-press-paws-resort)
 
-[### ERD Chart](https://lucid.app/lucidchart/958c1a24-58e0-41ac-a3c9-cf7298375a1e/edit?invitation[…]ee580b06-c910-4156-b1da-930288447c6e&referringApp=slack&page=0_0)
+### [ERD Chart](https://lucid.app/lucidchart/958c1a24-58e0-41ac-a3c9-cf7298375a1e/edit?invitation[…]ee580b06-c910-4156-b1da-930288447c6e&referringApp=slack&page=0_0)
+
+<img src="https://i.imgur.com/zq8zzKl.png">
 
 ### Wireframes
 
