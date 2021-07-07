@@ -146,6 +146,7 @@ def add_room_photo(request, room_id):
 class ReservationCreate(LoginRequiredMixin, CreateView):
   model = Reservation
   form_class = ReservationForm
+  success_url = 'success/'
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -159,7 +160,6 @@ class ReservationCreate(LoginRequiredMixin, CreateView):
 class ReservationRoomCreate(LoginRequiredMixin, CreateView):
   model = Reservation
   form_class = ReservationRoomForm
-
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -176,6 +176,9 @@ class ReservationRoomCreate(LoginRequiredMixin, CreateView):
     form.instance.user = self.request.user
     form.instance.room = Room.objects.get(id=self.kwargs['room_id'])
     return super().form_valid(form)
+  
+  def get_success_url(self):
+      return reverse('successful_reservation')
 
 
 @login_required
