@@ -17,7 +17,7 @@
     {% if reservation.date_from >= date %}
     {% if reservation == latest_res %}
     <div class="card-content">
-        <span class="card-title">Reservation from {{reservation.date_from}} to {{reservation.date_to}} &nbsp;<span style="color:gold; border:2px solid black; border-radius: 10px; background-color: black; padding:5px">NEW!</span></span>
+        <span class="card-title">Reservation from {{reservation.date_from}} to {{reservation.date_to}} &nbsp;<span style="color:gold !important; border:2px solid black; border-radius: 10px; background-color: black; padding:5px">NEW!</span></span>
         <p>Reservation number: {{reservation.id}}</p>
     </div>
     <div class="card-action">
