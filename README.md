@@ -1,4 +1,4 @@
-# 🐶 Press Paws 😺
+# 🐶 Press Paws Pet Resort 😺
 
 The only resort of its kind that recognizes the bond between you and your pets, and takes away the hassle and worry of leaving your fur baby behind while on vacation.
 
